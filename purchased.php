@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reserved</title>
+    <!-- css for mobile -->
+    <link rel="stylesheet" href="style.css">
+    <!-- css for desktop -->
+    <link rel="stylesheet" href="desktopStyle.css" media="screen and (min-width:992px)">
+</head>
+<body>
+<div class="navbar" >
+
+        <div class="nav-logo col-2">
+
+                <img src="image/logo1.jpg" alt="Train logo" height="60px" width="60px">
+
+        </div>
+        <div class="nav-heading col-4">
+                <h1>Bangladesh Railway</h1>
+        </div>
+        <div class="navbar-menu col-6">
+       <a href="admin dashboard.php">Dashboard</a>
+            <a href="logout.php">Logout</a>
+        </div>
+
+
+    </div>
+
+<h2 align=center>Reservation List</h2>
+<table align=center border="2">
+<tr>
+<th>Passenger Name</th>
+<th>Train Name</th>
+<th>Source</th>
+<th>Destination</th>
+<th>No of seat(s)</th>
+</tr>
+<!-- <th>Journey Date</th> -->
+
+<?php
+include("connection.php");
+// error_reporting(0);
+$query="select * from reserved";
+$data=mysqli_query($con,$query);
+$total=mysqli_num_rows($data);
+
+// echo "$total";
+if($total!=0)
+{
+   
+    while($result=mysqli_fetch_assoc($data))
+    {
+        echo "
+        <tr>
+        <td>".$result['pnr_email']."</td>
+        <td>".$result['train_name']."</td>
+        <td>".$result['source']."</td>
+        <td>".$result['destination']."</td>
+        <td>".$result['no_of_seat']."</td>
+        </tr>
+        ";
+    }
+    // <td>".$result['journey_date']."</td>
+    
+    
+}
+else
+echo "No records found";
+
+
+?> 
+</table>
+</body>
+</html>
+
